@@ -1,5 +1,5 @@
 ﻿using Pentago.Services.Authentication.Models;
-using Microsoft.Data.Sqlite;
+using System.Data.SQLite;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -24,11 +24,11 @@ public class AuthenticationService : IAuthenticationService
 
         var (usernameOrEmail, password) = model;
 
-        await using var connection = new SqliteConnection(_connectionString);
+        await using var connection = new SQLiteConnection(_connectionString);
         await connection.OpenAsync();
 
         var command =
-            new SqliteCommand(
+            new SQLiteCommand(
                 @"SELECT id, api_key_hash
                     FROM users
                     WHERE (normalized_username = @usernameOrEmail OR email = @usernameOrEmail)

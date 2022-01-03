@@ -1,9 +1,7 @@
-﻿namespace Pentago.Services.Engine;
+using Pentago.Services.Engine;
 
-/// <summary>
-/// This class is a default implementation of the <see cref="IEngine"/> interface.
-/// </summary>
-/// <inheritdoc cref="IEngine"/>
+namespace Pentago.Services.Engine;
+
 public class Engine : IEngine
 {
     private readonly string _connectionString;
@@ -11,5 +9,15 @@ public class Engine : IEngine
     public Engine(string connectionString)
     {
         _connectionString = connectionString;
+    }
+
+    public Evaluation Evaluate(Board position)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Move BestMove(Board position)
+    {
+        throw new NotImplementedException();
     }
 }

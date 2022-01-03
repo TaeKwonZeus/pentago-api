@@ -42,7 +42,7 @@ public class LoginController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogWarning("Login failed", e);
+            _logger.LogWarning(e, "Login failed");
 
             return Problem("Internal server error: ", e.Message);
         }

@@ -1,8 +1,13 @@
-﻿namespace Pentago.Services.Engine;
+namespace Pentago.Services.Engine;
 
-/// <summary>
-/// This interface represents a Pentago engine.
-/// </summary>
 public interface IEngine
 {
+    public Evaluation Evaluate(Board position);
+
+    public Move BestMove(Board position);
+
+    public static IEngine Instance(string connectionString)
+    {
+        return new Engine(connectionString);
+    }
 }
