@@ -2,10 +2,10 @@
 using Pentago.Services.Authentication;
 using Pentago.Services.Authentication.Models;
 
-namespace Pentago.Controllers.Authentication;
+namespace Pentago.Api.Controllers.Authentication;
 
 /// <summary>
-/// This controller represents a login endpoint.
+///     This controller represents a login endpoint.
 /// </summary>
 [Route("api/auth/[controller]")]
 [ApiController]
@@ -21,7 +21,7 @@ public class LoginController : ControllerBase
     }
 
     /// <summary>
-    /// Verifies the user and sends an API key as a response.
+    ///     Verifies the user and sends an API key as a response.
     /// </summary>
     /// <param name="model">Request body.</param>
     /// <returns>The user's API key.</returns>
@@ -32,13 +32,10 @@ public class LoginController : ControllerBase
         {
             var res = await _authenticationService.LoginAsync(model);
 
-            if (res != null)
-            {
-                _logger.LogInformation("Successfully logged in user {User}", model.UsernameOrEmail);
-                return Ok(res);
-            }
-
-            return NotFound("User not found");
+            if (res == null) return NotFound("User not found");
+            
+            _logger.LogInformation("Successfully logged in user {User}", model.UsernameOrEmail);
+            return Ok(res);
         }
         catch (Exception e)
         {

@@ -2,10 +2,10 @@
 using Pentago.Services.Authentication;
 using Pentago.Services.Authentication.Models;
 
-namespace Pentago.Controllers.Authentication;
+namespace Pentago.Api.Controllers.Authentication;
 
 /// <summary>
-/// This controller represents a register endpoint.
+///     This controller represents a register endpoint.
 /// </summary>
 [Route("api/auth/[controller]")]
 [ApiController]
@@ -21,7 +21,7 @@ public class RegisterController : ControllerBase
     }
 
     /// <summary>
-    /// Registers the user.
+    ///     Registers the user.
     /// </summary>
     /// <param name="model">Request body.</param>
     [HttpPost]
@@ -35,7 +35,7 @@ public class RegisterController : ControllerBase
         }
         catch (Exception e)
         {
-            _logger.LogWarning("Login failed", e);
+            _logger.LogWarning(e, "Login failed");
             return Problem("Internal server error: ", e.Message);
         }
     }

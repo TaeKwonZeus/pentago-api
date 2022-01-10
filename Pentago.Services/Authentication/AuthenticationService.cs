@@ -1,14 +1,14 @@
-﻿using Pentago.Services.Authentication.Models;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 using System.Security.Cryptography;
 using System.Text;
+using Pentago.Services.Authentication.Models;
 
 namespace Pentago.Services.Authentication;
 
 /// <summary>
-/// This class is a default implementation of the <see cref="IAuthenticationService"/> interface.
+///     This class is a default implementation of the <see cref="IAuthenticationService" /> interface.
 /// </summary>
-/// <inheritdoc cref="IAuthenticationService"/>
+/// <inheritdoc cref="IAuthenticationService" />
 public class AuthenticationService : IAuthenticationService
 {
     private readonly string _connectionString;
@@ -69,7 +69,10 @@ public class AuthenticationService : IAuthenticationService
         throw new NotImplementedException();
     }
 
-    private static string ToStandard(string str) => str.Trim().Normalize().ToLower();
+    private static string ToStandard(string str)
+    {
+        return str.Trim().Normalize().ToLower();
+    }
 
     private static string Sha256HashOf(string str)
     {
