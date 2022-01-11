@@ -33,7 +33,7 @@ public class LoginController : ControllerBase
             var res = await _authenticationService.LoginAsync(model);
 
             if (res == null) return NotFound("User not found");
-            
+
             _logger.LogInformation("Successfully logged in user {User}", model.UsernameOrEmail);
             return Ok(res);
         }
