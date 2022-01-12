@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Pentago.Services\Pentago.Services.csproj" />
+        <ProjectReference Include="..\Pentago.Services\Pentago.Services.csproj"/>
     </ItemGroup>
 
 </Project>
