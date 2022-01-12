@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS users
     password_hash       TEXT NOT NULL,
     api_key_hash        TEXT NOT NULL,
     glicko_rating       INT  NOT NULL,
-    glicko_rd           INT  NOT NULL
+    glicko_rd           REAL NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS games

@@ -5,7 +5,7 @@ namespace Pentago.Api.Controllers;
 /// <summary>
 ///     This controller represents a test endpoint.
 /// </summary>
-[Route("[controller]")]
+[Route("test")]
 [ApiController]
 public class TestController : ControllerBase
 {
