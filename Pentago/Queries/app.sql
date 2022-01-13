@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS users
     normalized_username TEXT NOT NULL UNIQUE,
     email               TEXT NOT NULL UNIQUE,
     password_hash       TEXT NOT NULL,
-    api_key_hash        TEXT NOT NULL,
     glicko_rating       INT  NOT NULL,
     glicko_rd           REAL NOT NULL
 );

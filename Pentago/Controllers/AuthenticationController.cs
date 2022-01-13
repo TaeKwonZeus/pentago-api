@@ -14,12 +14,13 @@ public class AuthenticationController : ControllerBase
     private readonly IAuthenticationService _authenticationService;
     private readonly ILogger<AuthenticationController> _logger;
 
-    public AuthenticationController(IAuthenticationService authenticationService, ILogger<AuthenticationController> logger)
+    public AuthenticationController(IAuthenticationService authenticationService,
+        ILogger<AuthenticationController> logger)
     {
         _authenticationService = authenticationService;
         _logger = logger;
     }
-    
+
     /// <summary>
     ///     Verifies the user and sends an API key as a response.
     /// </summary>
@@ -44,7 +45,7 @@ public class AuthenticationController : ControllerBase
             return Problem("Internal server error: ", e.Message);
         }
     }
-    
+
     /// <summary>
     ///     Registers the user.
     /// </summary>
