@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Pentago.Models.Options;
 using Pentago.Services.Authentication;
-using Pentago.Services.Authentication.Models;
 using Pentago.Services.Engine;
 
 var builder = WebApplication.CreateBuilder(args);

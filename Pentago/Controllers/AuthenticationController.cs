@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pentago.Services.Authentication;
 using Pentago.Services.Authentication.Models;
 
-namespace Pentago.Api.Controllers;
+namespace Pentago.Controllers;
 
 /// <summary>
 ///     This controller handles user authentication requests.
@@ -31,7 +31,7 @@ public class AuthenticationController : ControllerBase
     {
         try
         {
-            var res = await _authenticationService.LoginAsync(model);
+            var res = await _authenticationService.GetTokenAsync(model);
 
             if (res == null) return NotFound("User not found");
 

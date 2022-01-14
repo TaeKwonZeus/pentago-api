@@ -31,9 +31,7 @@ public class Evaluation
 
     public override string ToString()
     {
-        if (_eval != null) return _eval.ToString();
-        if (_winIn != null) return $"#{_winIn}";
-
-        return "-";
+        if (_eval != null) return _eval.ToString()!;
+        return _winIn != null ? $"#{_winIn}" : "-";
     }
 }

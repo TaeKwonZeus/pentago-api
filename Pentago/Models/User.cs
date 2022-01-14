@@ -1,10 +1,11 @@
-namespace Pentago.Api.Models;
+namespace Pentago.Models;
 
 /// <summary>
 ///     This record represents a row in the users table.
 /// </summary>
 public record User
 {
+#pragma warning disable CS8618
     /// <summary>
     ///     A user's GUID.
     /// </summary>

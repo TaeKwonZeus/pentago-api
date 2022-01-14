@@ -1,7 +1,7 @@
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Pentago.Services.Authentication.Models;
+namespace Pentago.Models.Options;
 
 /// <summary>
 ///     This record represents JWT authentication options.

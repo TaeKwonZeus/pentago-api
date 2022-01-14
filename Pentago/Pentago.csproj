@@ -8,16 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Dapper" Version="2.0.123" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Pentago.Services\Pentago.Services.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Services" />
+        <PackageReference Include="System.Data.SQLite" Version="1.0.115.5" />
     </ItemGroup>
 
 </Project>

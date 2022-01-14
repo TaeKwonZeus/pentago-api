@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Pentago.Api.Controllers;
+namespace Pentago.Controllers;
 
 /// <summary>
 ///     This controller represents a test endpoint.

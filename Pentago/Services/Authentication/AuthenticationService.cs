@@ -1,6 +1,9 @@
 ﻿using System.Data.SQLite;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using System.Text;
+using Dapper;
+using Pentago.Models;
 using Pentago.Services.Authentication.Models;
 
 namespace Pentago.Services.Authentication;
@@ -18,47 +21,13 @@ public class AuthenticationService : IAuthenticationService
         _connectionString = connectionString;
     }
 
-    public async Task<string?> LoginAsync(LoginModel model)
+    public async Task<JwtSecurityToken?> GetTokenAsync(LoginModel model)
     {
-        // TODO Rewrite this shit
-
-        var (usernameOrEmail, password) = model;
-
         await using var connection = new SQLiteConnection(_connectionString);
-        await connection.OpenAsync();
 
-        var command =
-            new SQLiteCommand(
-                @"SELECT id, api_key_hash
-                    FROM users
-                    WHERE (normalized_username = @usernameOrEmail OR email = @usernameOrEmail)
-                      AND password_hash = @passwordHash
-                    LIMIT 1;",
-                connection);
-        command.Parameters.AddWithValue("@usernameOrEmail", ToStandard(usernameOrEmail));
-        command.Parameters.AddWithValue("@passwordHash", Sha256HashOf(password));
-
-        int id;
-
-        await using (var reader = await command.ExecuteReaderAsync())
-        {
-            if (!await reader.ReadAsync()) return null;
-
-            var idOrdinal = reader.GetOrdinal("id");
-
-            id = reader.GetInt32(idOrdinal);
-        }
-
-        var apiKey = GenerateApiKey();
-
-        command.CommandText = @"UPDATE users SET api_key_hash = @apiKeyHash WHERE id = @id;";
-        command.Parameters.Clear();
-        command.Parameters.AddWithValue("@id", id);
-        command.Parameters.AddWithValue("@apiKeyHash", Sha256HashOf(apiKey));
-
-        await command.ExecuteNonQueryAsync();
-
-        return apiKey;
+        var identity = connection.QueryFirst<User>("");
+        
+        return null;
     }
 
     public async Task RegisterAsync(RegisterModel model)

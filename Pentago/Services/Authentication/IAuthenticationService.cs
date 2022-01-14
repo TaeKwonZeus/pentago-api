@@ -1,4 +1,5 @@
-﻿using Pentago.Services.Authentication.Models;
+﻿using System.IdentityModel.Tokens.Jwt;
+using Pentago.Services.Authentication.Models;
 
 namespace Pentago.Services.Authentication;
 
@@ -8,11 +9,11 @@ namespace Pentago.Services.Authentication;
 public interface IAuthenticationService
 {
     /// <summary>
-    ///     Verifies the user and creates an API key.
+    ///     Verifies the user and returns a JWT token.
     /// </summary>
     /// <param name="model">User data.</param>
-    /// <returns>The user's API key.</returns>
-    Task<string?> LoginAsync(LoginModel model);
+    /// <returns>A JWT token.</returns>
+    Task<JwtSecurityToken?> GetTokenAsync(LoginModel model);
 
     /// <summary>
     ///     Registers the user.
