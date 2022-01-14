@@ -40,10 +40,7 @@ public class AuthenticationController : ControllerBase
         var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
 
         _logger.LogInformation("Successful login");
-        return Ok(new
-        {
-            token = encodedToken
-        });
+        return Ok(new { token = encodedToken });
     }
 
     /// <summary>
