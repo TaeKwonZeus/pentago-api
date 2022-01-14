@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Mvc;
 using Pentago.Services.Authentication;
 using Pentago.Services.Authentication.Models;
@@ -22,28 +23,27 @@ public class AuthenticationController : ControllerBase
     }
 
     /// <summary>
-    ///     Verifies the user and sends an API key as a response.
+    ///     Verifies the user and sends a JWT token.
     /// </summary>
     /// <param name="model">Request body.</param>
-    /// <returns>The user's API key.</returns>
+    /// <returns>A JWT token.</returns>
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
-        try
+        var token = await _authenticationService.GetTokenAsync(model);
+        if (token == null)
         {
-            var res = await _authenticationService.GetTokenAsync(model);
-
-            if (res == null) return NotFound("User not found");
-
-            _logger.LogInformation("Successfully logged in user {User}", model.UsernameOrEmail);
-            return Ok(res);
+            _logger.LogInformation("Login failed");
+            return BadRequest(new { errorText = "Invalid username or password" });
         }
-        catch (Exception e)
+
+        var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+        _logger.LogInformation("Successful login");
+        return Ok(new
         {
-            _logger.LogWarning(e, "Login failed");
-
-            return Problem("Internal server error: ", e.Message);
-        }
+            token = encodedToken
+        });
     }
 
     /// <summary>

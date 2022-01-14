@@ -3,6 +3,6 @@
 /// <summary>
 ///     This record represents a login request body.
 /// </summary>
-/// <param name="UsernameOrEmail">The user's username or email.</param>
+/// <param name="Username">The user's username.</param>
 /// <param name="Password">The user's password.</param>
-public record LoginModel(string UsernameOrEmail, string Password);
+public record LoginModel(string Username, string Password);

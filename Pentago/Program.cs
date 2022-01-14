@@ -30,8 +30,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>(_ =>
-    new AuthenticationService(builder.Configuration.GetConnectionString("App")));
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IEngine, Engine>(_ => new Engine(builder.Configuration.GetConnectionString("Engine")));
 
 var app = builder.Build();
