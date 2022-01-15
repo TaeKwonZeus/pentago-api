@@ -32,7 +32,7 @@ public class AuthenticationService : IAuthenticationService
 
         await using var connection = new SQLiteConnection(_connectionString);
 
-        var user = connection.QueryFirst<string>(@"SELECT id
+        var user = connection.QueryFirstOrDefault<string>(@"SELECT id
             FROM users
             WHERE username = @Username
               AND password_hash = @PasswordHash", new
@@ -47,7 +47,7 @@ public class AuthenticationService : IAuthenticationService
             _authenticationOptions.Audience,
             new List<Claim> { new(ClaimsIdentity.DefaultNameClaimType, model.Username) },
             DateTime.UtcNow,
-            DateTime.UtcNow.Add(TimeSpan.FromMinutes(_authenticationOptions.Lifetime)),
+            DateTime.UtcNow.Add(TimeSpan.FromDays(_authenticationOptions.Lifetime)),
             new SigningCredentials(_authenticationOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256)
         );
     }
