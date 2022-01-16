@@ -18,10 +18,11 @@ public record AuthenticationOptions
     /// </summary>
     public string Audience { get; set; } = "";
 
+    // ReSharper disable once MemberCanBePrivate.Global
     /// <summary>
     ///     The secret key used for encryption.
     /// </summary>
-    private string Key { get; } = "";
+    public string Key { get; set; } = "";
 
     /// <summary>
     ///     The JWT token lifetime.
