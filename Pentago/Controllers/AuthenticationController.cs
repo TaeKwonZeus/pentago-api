@@ -6,7 +6,7 @@ using Pentago.Services.Authentication.Models;
 namespace Pentago.Controllers;
 
 /// <summary>
-///     This controller handles user authentication requests.
+/// This controller handles user authentication requests.
 /// </summary>
 [Route("api/auth")]
 [ApiController]
@@ -23,7 +23,7 @@ public class AuthenticationController : ControllerBase
     }
 
     /// <summary>
-    ///     Verifies the user and sends a JWT token.
+    /// Verifies the user and sends a JWT token.
     /// </summary>
     /// <param name="model">Request body.</param>
     /// <returns>A JWT token.</returns>
@@ -44,7 +44,7 @@ public class AuthenticationController : ControllerBase
     }
 
     /// <summary>
-    ///     Registers the user.
+    /// Registers the user.
     /// </summary>
     /// <param name="model">Request body.</param>
     [HttpPost("register")]

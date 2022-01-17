@@ -11,7 +11,7 @@ using Pentago.Services.Authentication.Models;
 namespace Pentago.Services.Authentication;
 
 /// <summary>
-///     This class is a default implementation of the <see cref="IAuthenticationService" /> interface.
+/// This class is a default implementation of the <see cref="IAuthenticationService" /> interface.
 /// </summary>
 /// <inheritdoc cref="IAuthenticationService" />
 public class AuthenticationService : IAuthenticationService

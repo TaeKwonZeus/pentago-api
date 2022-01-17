@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Pentago.Controllers;
 
 /// <summary>
-///     This controller represents a test endpoint.
+/// This controller represents a test endpoint.
 /// </summary>
 [Route("test")]
 [ApiController]

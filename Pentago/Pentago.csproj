@@ -15,11 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Helpers" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Helpers\SecurityKeyGenerator.cs" />
+        <Compile Remove="Helpers\SecurityKeyGenerator.cs" />
     </ItemGroup>
 
 </Project>
