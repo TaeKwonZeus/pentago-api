@@ -14,8 +14,8 @@ public class TestController : ControllerBase
     /// </summary>
     /// <returns>A test payload.</returns>
     [HttpGet]
-    public string Get()
+    public string Get(string name)
     {
-        return "Test endpoint";
+        return $"Hello {name}!";
     }
 }
