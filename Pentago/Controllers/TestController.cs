@@ -10,7 +10,7 @@ namespace Pentago.Controllers;
 public class TestController : ControllerBase
 {
     /// <summary>
-    ///     Returns a test payload.
+    /// Returns a test payload.
     /// </summary>
     /// <returns>A test payload.</returns>
     [HttpGet]
