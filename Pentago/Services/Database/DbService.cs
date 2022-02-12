@@ -1,5 +1,5 @@
 using System.Data.Common;
-using System.Data.SQLite;
+using Microsoft.Data.Sqlite;
 
 namespace Pentago.Services.Database;
 
@@ -14,6 +14,6 @@ public class DbService : IDbService
     
     public DbConnection GetDbConnection()
     {
-        return new SQLiteConnection(_connectionString);
+        return new SqliteConnection(_connectionString);
     }
 }
