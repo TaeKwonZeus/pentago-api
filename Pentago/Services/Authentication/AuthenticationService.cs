@@ -7,6 +7,7 @@ using Dapper;
 using Microsoft.IdentityModel.Tokens;
 using Pentago.Models.Options;
 using Pentago.Services.Authentication.Models;
+using Pentago.Services.Database;
 
 namespace Pentago.Services.Authentication;
 
@@ -17,20 +18,19 @@ namespace Pentago.Services.Authentication;
 public class AuthenticationService : IAuthenticationService
 {
     private readonly AuthenticationOptions _authenticationOptions = new();
-    private readonly string _connectionString;
+    private readonly IDbService _dbService;
 
-    public AuthenticationService(IConfiguration configuration)
+    public AuthenticationService(IConfiguration configuration, IDbService dbService)
     {
+        _dbService = dbService;
         configuration.GetSection("AuthenticationOptions").Bind(_authenticationOptions);
-
-        _connectionString = configuration.GetConnectionString("App");
     }
 
     public async Task<JwtSecurityToken?> GetTokenAsync(LoginModel model)
     {
         var (username, password) = model;
 
-        await using var connection = new SQLiteConnection(_connectionString);
+        await using var connection = _dbService.GetDbConnection();
 
         var user = connection.QueryFirstOrDefault<string>(@"SELECT id
             FROM users
