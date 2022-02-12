@@ -56,6 +56,10 @@ public class AuthenticationController : ControllerBase
             _logger.LogInformation("User {User} logged in", model.Username);
             return Ok();
         }
+        catch (InvalidDataException e)
+        {
+            return Conflict("Account with given username or email already exists");
+        }
         catch (Exception e)
         {
             _logger.LogWarning(e, "Login failed");

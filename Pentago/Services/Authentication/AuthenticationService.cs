@@ -17,12 +17,14 @@ namespace Pentago.Services.Authentication;
 public class AuthenticationService : IAuthenticationService
 {
     private readonly AuthenticationOptions _authenticationOptions = new();
+    private readonly PentagoOptions _pentagoOptions = new();
     private readonly IDbService _dbService;
 
     public AuthenticationService(IConfiguration configuration, IDbService dbService)
     {
         _dbService = dbService;
         configuration.GetSection("AuthenticationOptions").Bind(_authenticationOptions);
+        configuration.GetSection("PentagoOptions").Bind(_pentagoOptions);
     }
 
     public async Task<JwtSecurityToken?> GetTokenAsync(LoginModel model)
@@ -31,7 +33,7 @@ public class AuthenticationService : IAuthenticationService
 
         await using var connection = _dbService.GetDbConnection();
 
-        var user = connection.QueryFirstOrDefault<string>(@"SELECT id
+        var user = await connection.QueryFirstOrDefaultAsync<string>(@"SELECT id
             FROM users
             WHERE username = @Username
               AND password_hash = @PasswordHash", new
@@ -53,10 +55,31 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task RegisterAsync(RegisterModel model)
     {
-        // TODO Write this shit
-        await Task.Run(() => { }).ConfigureAwait(false);
+        var (username, email, password) = model;
 
-        throw new NotImplementedException();
+        await using var connection = _dbService.GetDbConnection();
+
+        var user = await connection.QueryFirstOrDefaultAsync<string>(@"SELECT id
+            FROM users
+            WHERE username = @Username
+              OR email = @Email", new
+        {
+            Username = username,
+            Email = email
+        });
+
+        if (user != null) throw new InvalidDataException("User already exists");
+
+        await connection.ExecuteAsync(@"INSERT INTO users (id, username, email, password_hash, glicko_rating, glicko_rd)
+            VALUES (@Id, @Username, @Email, @PasswordHash, @GlickoRating, @GlickoRd);", new
+        {
+            Id = Guid.NewGuid().ToString(),
+            Username = username,
+            Email = email,
+            PasswordHash = Sha256HashOf(password),
+            GlickoRating = _pentagoOptions.DefaultGlickoRating,
+            GlickoRd = _pentagoOptions.DefaultGlickoRd
+        });
     }
 
     private static string Sha256HashOf(string str)
