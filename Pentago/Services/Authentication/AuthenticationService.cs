@@ -17,8 +17,8 @@ namespace Pentago.Services.Authentication;
 public class AuthenticationService : IAuthenticationService
 {
     private readonly AuthenticationOptions _authenticationOptions = new();
-    private readonly PentagoOptions _pentagoOptions = new();
     private readonly IDbService _dbService;
+    private readonly PentagoOptions _pentagoOptions = new();
 
     public AuthenticationService(IConfiguration configuration, IDbService dbService)
     {
