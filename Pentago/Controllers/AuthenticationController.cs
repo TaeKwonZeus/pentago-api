@@ -58,6 +58,7 @@ public class AuthenticationController : ControllerBase
         }
         catch (InvalidDataException e)
         {
+            _logger.LogInformation("Conflict on login");
             return Conflict("Account with given username or email already exists");
         }
         catch (Exception e)
